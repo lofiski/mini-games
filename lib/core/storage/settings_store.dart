@@ -14,14 +14,10 @@ abstract interface class SettingsStore {
 
 /// 测试与降级场景使用的内存实现。
 class InMemorySettingsStore implements SettingsStore {
-  // 命名参数不允许以下划线开头，因此无法用初始化形参直接赋给 _muted。
-  // ignore: prefer_initializing_formals
-  InMemorySettingsStore({Map<String, int>? scores, bool muted = false})
-    : _scores = {...?scores},
-      _muted = muted;
+  InMemorySettingsStore({Map<String, int>? scores}) : _scores = {...?scores};
 
   final Map<String, int> _scores;
-  bool _muted;
+  bool _muted = false;
 
   @override
   int highScore(String gameId) => _scores[gameId] ?? 0;
