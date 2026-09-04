@@ -13,7 +13,15 @@
 ## 下载
 
 前往 [Releases](https://github.com/lofiski/mini-games/releases) 下载签名 APK。
-`arm64-v8a` 适用于绝大多数现代安卓手机；不确定时选 `universal`。
+
+| 文件 | 适用设备 |
+| --- | --- |
+| `app-arm64-v8a-release.apk` | 绝大多数 2018 年后的安卓手机，**优先选它** |
+| `app-armeabi-v7a-release.apk` | 较老的 32 位设备 |
+| `app-x86_64-release.apk` | 安卓模拟器 |
+| `app-release.apk` | 通用包，不确定选哪个时用这个（体积最大） |
+
+APK 使用固定密钥签名，后续版本可直接覆盖安装，无需卸载。
 
 ## 开发
 

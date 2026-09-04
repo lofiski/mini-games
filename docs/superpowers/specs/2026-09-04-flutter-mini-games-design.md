@@ -140,7 +140,7 @@ domain 层是纯函数：输入旧状态与操作，输出新状态和一组描�
 
 ## 5. 音效设计
 
-素材来自 Kenney 的 CC0 音效包（Interface Sounds / Impact Sounds 等，公有领域，商用免归因），选取 6–8 个短 OGG，仓库体积增加约数百 KB。
+素材来自 Kenney 的 CC0 音效包（Interface Sounds / Impact Sounds 等，公有领域，商用免归因），选取 7 个短 WAV，仓库体积增加约 125 KB。选 WAV 而非 OGG 是因为短音效免解码、启动更快，且镜像仓库提供的就是 WAV。
 
 畅快感由以下技巧共同支撑：
 
@@ -210,5 +210,5 @@ domain 层是纯函数：输入旧状态与操作，输出新状态和一组描�
 ## 10. 交付
 
 - 公开 GitHub 仓库 `lofiski/mini-games`（公开仓库 Actions 额度无限制，Secrets 依然安全）。
-- Android `applicationId`：`dev.lofiski.minigames`。
+- Android `applicationId`：`dev.lofiski.mini_games`（与 namespace 保持一致）。
 - 签名 release APK 通过 GitHub Release 分发。

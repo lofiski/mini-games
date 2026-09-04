@@ -1,5 +1,30 @@
 # Mini Games 实现计划
 
+> **执行状态：已于 2026-09-04 全部完成**，首个版本 v0.1.0 已发布。
+> 执行过程中与本计划的偏差记录如下（计划正文保留原样，作为决策依据的存档）：
+>
+> 1. **flutter_soloud 解析到 5.0.0**（计划撰写时基于 2.x 的 API 记忆）。实际差异：
+>    `play()` 是同步方法而非返回 Future，且带 `scale` 参数直接指定相对播放速率。
+>    因此实现改为在 `play()` 中一次性设定速率，而不是先起播再调 `setRelativePlaySpeed`，
+>    避免了变调前的瞬间跑调。
+> 2. **CI 需要额外安装 `libasound2-dev`**。flutter_soloud 5.x 使用 Dart native assets
+>    构建钩子，`flutter test` 会为宿主平台编译 SoLoud 的 C++ 源码，其 ALSA 后端
+>    需要 `alsa/asoundlib.h`，GitHub runner 默认没有。
+> 3. **音效素材是 WAV 而非 OGG**，共 7 个约 125 KB。CC0 镜像仓库提供的就是 WAV，
+>    且短音效用 WAV 免解码、启动更快。
+> 4. **需要显式声明 `meta` 依赖**。domain 层禁止 import Flutter，`@immutable` 只能
+>    来自 `package:meta`，而它默认只是传递依赖。
+> 5. **applicationId 沿用 `dev.lofiski.mini_games`**（计划中写的是 `dev.lofiski.minigames`）。
+>    与 namespace 保持一致，避免二者分叉。
+> 6. **`InMemorySettingsStore` 去掉了 `muted` 构造参数**：无调用方，且命名参数不能以
+>    下划线开头导致无法使用初始化形参，会触发 `prefer_initializing_formals`。
+> 7. **未执行 Task 14 Step 5 的真机验证**：本机没有安卓设备、模拟器与 Android SDK。
+>    该步骤留给使用者完成。
+>
+> 已知未解决项：`softprops/action-gh-release` 等 action 依赖的 Node 20 已被 GitHub
+> 标记弃用（仅告警，不影响构建）；`actions/setup-java@v4` 建议升级到 v5。
+
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** 构建一个极简安卓小游戏合集：打开即见游戏方块列表，点击直接开玩，首批含 2048、数字华容道、点点消消乐三款。
