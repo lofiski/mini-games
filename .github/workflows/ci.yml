@@ -23,6 +23,11 @@ jobs:
           channel: stable
           cache: true
 
+      # flutter_soloud 5.x 走 Dart native assets 构建钩子，flutter test 会为宿主
+      # 平台编译 SoLoud 的 C++ 源码，其 ALSA 后端需要 alsa/asoundlib.h。
+      - name: 安装 ALSA 开发库
+        run: sudo apt-get update && sudo apt-get install -y libasound2-dev
+
       - name: 拉取依赖
         run: flutter pub get
 
